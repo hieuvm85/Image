@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.transaction.Transactional;
@@ -45,11 +46,11 @@ public class ImageController {
 		
 		image.setImageBytes(outputStream.toByteArray());
 		imageRepository.save(image);
-        return new ResponseEntity<>("http://localhost:8888/api/image/"+image.getId(), HttpStatus.OK);
+        return new ResponseEntity<>("/api/image/get?id="+image.getId(), HttpStatus.OK);
     }
 	
-	 @GetMapping("/{id}")
-	    public ResponseEntity<byte[]> getImageById(@PathVariable int id) {
+	 @GetMapping("/get")
+	    public ResponseEntity<byte[]> getImageById(@RequestParam("id") int id) {
 	        byte[] imageData = imageService.getImageById(id);
 
 	        if (imageData != null) {
