@@ -36,8 +36,8 @@ public class ImageController {
 		
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(imageData);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        int width = 100; // Đặt kích thước mới của chiều rộng
-        int height = 100; // Đặt kích thước mới của chiều cao
+        int width = 300; // Đặt kích thước mới của chiều rộng
+        int height = 360; // Đặt kích thước mới của chiều cao
         Thumbnails.of(inputStream)
         	.size(width, height)
         	.outputFormat("jpg") // Định dạng đầu ra
@@ -45,7 +45,7 @@ public class ImageController {
 		
 		image.setImageBytes(outputStream.toByteArray());
 		imageRepository.save(image);
-        return new ResponseEntity<>("http://localhost:8080/api/image/"+image.getId(), HttpStatus.OK);
+        return new ResponseEntity<>("http://localhost:8888/api/image/"+image.getId(), HttpStatus.OK);
     }
 	
 	 @GetMapping("/{id}")
