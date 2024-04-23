@@ -1,6 +1,7 @@
 package com.example.demoJWT.model.entity;
 
 import java.io.ByteArrayInputStream;
+import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Optional;
@@ -28,10 +29,12 @@ public class ImageController {
 	@Autowired
 	ImageRepository imageRepository;
 	@Autowired
-	 private ImageService imageService;
+	private ImageService imageService;
 
 	@PostMapping("/addImage")
-	public ResponseEntity<String> uploadImage(@RequestBody byte[] imageData) throws IOException {
+	public ResponseEntity<String> uploadImage(@RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+		
+		byte[] imageData = imageFile.getBytes();
 		Image image = new Image();
 		image.setImageBytes(imageData);
 		
